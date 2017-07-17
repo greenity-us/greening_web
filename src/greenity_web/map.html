@@ -27,8 +27,9 @@
     // an info window pops up displaying the new bounds.
 
     var map;
-    var tiles;          // heatmap tiles that should be drawn on map
-    var mapSources;     // pollution sources (factories, etc.) that should be shown on map with markers
+    var mapData;
+//    var tileData;          // heatmap tiles that should be drawn on map
+//    var markerSources;     // pollution sources (factories, etc.) that should be shown on map with markers
     var colors = {      // colors of tiles corresponding to their Greenity Score
         1: '#BF021E',
         2: '#FF0000',
@@ -43,111 +44,85 @@
     };
 
     function initMap() {
-//        console.log('initMap');
         var center = new google.maps.LatLng(37.461021, -122.163314);
-
         map = new google.maps.Map(document.getElementById('map'), {center: center, zoom: 11});
 
         /* 'bounds_changed' event happens too frequently
          better to use 'idle' event that fires when map changed and now is idle.
          // google.maps.event.addListener(map, 'bounds_changed', function () {}
          */
-        google.maps.event.addListener(map, 'idle', getMapData);
+        google.maps.event.addListener(map, 'idle', redrawMap);
 
     }
 
-    function getMapData(){
+    function redrawMap() {
+        /* redraw map's heatmap tiles and pollution sources */
+        /* read the data from */
+        console.log('redrawing map');
         var mapBounds = map.getBounds();
-//        console.log('mapBounds: ' + mapBounds);
+        console.log('mapBounds: ' + mapBounds);
         var ne = mapBounds.getNorthEast();
         var sw = mapBounds.getSouthWest();
+//        var mapBoundCoords = {ne_lat: ne.lat(), ne_lng: ne.lng(), sw_lat: sw.lat(), sw_lng: sw.lng()};
 
-        var mapBoundCoords = {ne_lat: ne.lat(), ne_lng: ne.lng(), sw_lat: sw.lat(), sw_lng: sw.lng()};
-//        console.log('mapBoundCoords:', 'ne_lat:', ne.lat(), 'ne_lng:', ne.lng(),
-//                'sw_lat:', sw.lat(), 'sw_lng:', sw.lng());
-//        console.log('mapBoundCoords:', JSON.stringify(mapBoundCoords));
-//        console.log('mapBoundCoords:', mapBoundCoords);
-
-
-        /* Get data */
         var url = 'https://s71dowh3xl.execute-api.us-west-2.amazonaws.com/dev/map_data' +
                 '?ne_lat=' + ne.lat() + '&ne_lng=' + ne.lng() + '&sw_lat=' + sw.lat() + '&sw_lng=' + sw.lng();
         console.log('url:', url);
 
-        // jQuery version
-//        $.get(url, function(data, status){
-//            console.log('jQuery data:', data, '\nstatus:', status);
-//            mapData = data;
-//            console.log('mapData1:', mapData);
-//
-//        });
-
-        // jQuery AJAX
-        $.ajax({
-            type : "GET",
-            url : url,
-            // beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '[your-api-key]');},
-//            success : function(result) {
-//                //set your variable to the result
-//                mapData = result;
-//                console.log('mapData:', mapData);
-//            },
-            success : function(result, status, xhr){
-//                console.log('AJAX result:', result);
-                redrawMap(result, status, xhr);
-            },
-            error : function(result) {
-                //handle the error
-                console.log('error in result:', result);
+//        var mapData;
+        /* get data */
+        $.getJSON({
+            url: url,
+            success: function(result, status, xhr){
+//                console.log('jq result:', result);
+                mapData = result;
+//                console.log('map data:', mapData);
+//            $.each(result, function(i, field){
+                var tileData = mapData['tiles'];
+//                console.log('tiles:', tileData.length);
+                addHeatmapTiles(tileData);
+                console.debug('LOADING TILES DONE');
+                var pollutionSources = mapData['sources'];
+                console.debug('pollution sources :', pollutionSources.length);
+                addMarkersToMap(pollutionSources);
+                console.debug('LOADING SOURCES DONE');
+                console.log('MAP DATA LOADING FINISHED');
+//            });
             }
         });
 
-        // JS AJAX
-//        var xhttp = new XMLHttpRequest();
-//        xhttp.onreadystatechange = function() {
-//            if (this.readyState == 4 && this.status == 200) {
-////                document.getElementById("demo").innerHTML = this.responseText;
-//                console.log('server response:', this.responseText);
-//                mapData = this.responseText;
-//            }
-//        };
-//        xhttp.open("GET", url, true);
-//        xhttp.send();
-
-
-        /* Redraw map */
-
+        /* does not work
+        map.data.forEach(function(feature){
+            console.log('FEAT:' + feature);
+        })
+        */
 
     }
 
-    function redrawMap(result, status, xhr) {
-        //set your variable to the result
-//        console.log('redrawMap got result:', result);
-        if(status != 'success'){
-            console.error('error getting map data');
-            return
-        }
-        tiles = result['map_points'];
-        mapSources = result['sources'];
-        console.log('map points:', tiles, 'sources:', mapSources);
-
+    function addMarkersToMap(markerData) {
         /* show markers for sources on the map */
-        for(var c = 0; c < mapSources.length; c++){
-            console.log('sources:', mapSources[c]);
-            var coords = {lat: mapSources[c]['latitude'], lng: mapSources[c]['longitude']};
-            var markerTitle = mapSources[c]['name'] + ',\n' + mapSources[c]['address'];
+        for (var c = 0; c < markerData.length; c++) {
+//            console.log('sources:', markerData[c]);
+            var coords = {lat: markerData[c]['latitude'], lng: markerData[c]['longitude']};
+            var markerTitle = markerData[c]['name'] + ',\n' + markerData[c]['address'];
             var marker = new google.maps.Marker({
                 position: coords,
                 map: map,
                 title: markerTitle
             });
         }
+    }
+
+    function addHeatmapTiles(tileData) {
         /* show heatmap tiles for sources on the map */
-        console.log('num of tiles:', tiles.length);
-        for(c = 0; c < tiles.length; c++){
-            var tile = tiles[c];
+        var num_tiles = tileData.length;
+        console.log('num of tiles:', num_tiles);
+        for(var c = 0; c < num_tiles; c++){
+//            console.log('tile counter:', c);
+            var tile = tileData[c];
 //            console.log('tile:', tile);
             var polygon = new google.maps.Polygon({
+                id: tile['id'],
                 fillColor: colors[tile['score']],
                 fillOpacity: 0.6,
                 map: map,
