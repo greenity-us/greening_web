@@ -28,8 +28,6 @@
 
     var map;
     var mapData;
-//    var tileData;          // heatmap tiles that should be drawn on map
-//    var markerSources;     // pollution sources (factories, etc.) that should be shown on map with markers
     var colors = {      // colors of tiles corresponding to their Greenity Score
         1: '#BF021E',
         2: '#FF0000',
@@ -63,13 +61,10 @@
         console.log('mapBounds: ' + mapBounds);
         var ne = mapBounds.getNorthEast();
         var sw = mapBounds.getSouthWest();
-//        var mapBoundCoords = {ne_lat: ne.lat(), ne_lng: ne.lng(), sw_lat: sw.lat(), sw_lng: sw.lng()};
-
         var url = 'https://s71dowh3xl.execute-api.us-west-2.amazonaws.com/dev/map_data' +
                 '?ne_lat=' + ne.lat() + '&ne_lng=' + ne.lng() + '&sw_lat=' + sw.lat() + '&sw_lng=' + sw.lng();
         console.log('url:', url);
 
-//        var mapData;
         /* get data */
         $.getJSON({
             url: url,
@@ -77,25 +72,38 @@
 //                console.log('jq result:', result);
                 mapData = result;
 //                console.log('map data:', mapData);
-//            $.each(result, function(i, field){
                 var tileData = mapData['tiles'];
 //                console.log('tiles:', tileData.length);
                 addHeatmapTiles(tileData);
                 console.debug('LOADING TILES DONE');
+
+
+                console.log('does this work?');
+                map.data.forEach(function(feature) {
+                    console.log('>> ', feature.get('id'), 'properties are: ');
+                    feature.forEachProperty(function(value,property) {
+                        console.log(property,':',value);
+                    });
+                });
+                console.log('does this work? 2');
+
                 var pollutionSources = mapData['sources'];
                 console.debug('pollution sources :', pollutionSources.length);
                 addMarkersToMap(pollutionSources);
                 console.debug('LOADING SOURCES DONE');
-                console.log('MAP DATA LOADING FINISHED');
-//            });
+                console.debug('MAP DATA LOADING FINISHED');
+
+
+
             }
         });
 
-        /* does not work
-        map.data.forEach(function(feature){
-            console.log('FEAT:' + feature);
-        })
-        */
+        /* does not work */
+//        console.log('does this work?');
+//        map.data.forEach(function(feature){
+//            console.log('FEAT:' + feature);
+//        });
+
 
     }
 
@@ -120,7 +128,7 @@
         for(var c = 0; c < num_tiles; c++){
 //            console.log('tile counter:', c);
             var tile = tileData[c];
-//            console.log('tile:', tile);
+//            console.log('tile:', tile['id']);
             var polygon = new google.maps.Polygon({
                 id: tile['id'],
                 fillColor: colors[tile['score']],
