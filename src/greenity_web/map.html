@@ -28,6 +28,7 @@
 
     var map;
     var mapData;
+    var mapTiles = new Set();
     var colors = {      // colors of tiles corresponding to their Greenity Score
         1: '#BF021E',
         2: '#FF0000',
@@ -69,23 +70,12 @@
         $.getJSON({
             url: url,
             success: function(result, status, xhr){
-//                console.log('jq result:', result);
                 mapData = result;
 //                console.log('map data:', mapData);
                 var tileData = mapData['tiles'];
 //                console.log('tiles:', tileData.length);
                 addHeatmapTiles(tileData);
                 console.debug('LOADING TILES DONE');
-
-
-                console.log('does this work?');
-                map.data.forEach(function(feature) {
-                    console.log('>> ', feature.get('id'), 'properties are: ');
-                    feature.forEachProperty(function(value,property) {
-                        console.log(property,':',value);
-                    });
-                });
-                console.log('does this work? 2');
 
                 var pollutionSources = mapData['sources'];
                 console.debug('pollution sources :', pollutionSources.length);
@@ -97,14 +87,6 @@
 
             }
         });
-
-        /* does not work */
-//        console.log('does this work?');
-//        map.data.forEach(function(feature){
-//            console.log('FEAT:' + feature);
-//        });
-
-
     }
 
     function addMarkersToMap(markerData) {
@@ -124,19 +106,21 @@
     function addHeatmapTiles(tileData) {
         /* show heatmap tiles for sources on the map */
         var num_tiles = tileData.length;
-        console.log('num of tiles:', num_tiles);
+//        console.log('num of tiles:', num_tiles);
         for(var c = 0; c < num_tiles; c++){
-//            console.log('tile counter:', c);
             var tile = tileData[c];
-//            console.log('tile:', tile['id']);
-            var polygon = new google.maps.Polygon({
-                id: tile['id'],
-                fillColor: colors[tile['score']],
-                fillOpacity: 0.6,
-                map: map,
-                strokeWeight: 0,
-                paths: tile['tile_coords']
-            });
+            var tid = tile['id'];
+            if(! mapTiles.has(tid)) {
+                var polygon = new google.maps.Polygon({
+                    id: tid,
+                    fillColor: colors[tile['score']],
+                    fillOpacity: 0.6,
+                    map: map,
+                    strokeWeight: 0,
+                    paths: tile['tile_coords']
+                });
+                mapTiles.add(tid);
+            }
         }
 
     }
