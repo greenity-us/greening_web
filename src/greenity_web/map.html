@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--Conditionals for IE8-9 Support-->
+<!--[if IE]><html lang="en" class="ie"><![endif]-->
+<html>
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Greenity - Full Map</title>
+
+    <title>Greenity - Map</title>
+
+    <!--SEO Meta Tags-->
+    <meta name="description" content="Greenity website" />
+    <meta name="keywords" content="responsive html5 template, multipurpose, blog, portfolio, e-commerce, bootstrap 3, css, jquery, flat, modern" />
+    <meta name="author" content="David Managadze" />
+    <!--Mobile Specific Meta Tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--Favicon-->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!--Master Slider Styles-->
+    <link href="masterslider/style/masterslider.css" rel="stylesheet" media="screen">
+    <!--Kedavra Stylesheet-->
+    <link href="css/styles.css" rel="stylesheet" media="screen">
+    <!--Kedavra Color Scheme-->
+    <link class="color-scheme" href="css/colors/color-2f8cea.css" rel="stylesheet" media="screen">
+    <!--&lt;!&ndash;Google Maps API&ndash;&gt;-->
+    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5DLwPPVAz88_k0yO2nmFe7T9k1urQs84"></script>-->
+    <!--Modernizr-->
+    <script src="js/libs/modernizr.custom.js"></script>
+    <!--Adding Media Queries Support for IE8-->
+    <!--[if lt IE 9]>
+    <script src="js/plugins/respond.js"></script>
+    <![endif]-->
+
     <style>
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
         #map {
-            height: 90%;
+            height: 50%;
         }
         /* Optional: Makes the sample page fill the window. */
         html, body {
@@ -18,14 +45,114 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-<div id="map"></div>
-<script>
-    // This example adds a user-editable rectangle to the map.
-    // When the user changes the bounds of the rectangle,
-    // an info window pops up displaying the new bounds.
 
+</head>
+
+<!--Body-->
+<body class="parallax animated fadeIn"><!--Add "parallax" class if you have elements on the page with parallax backgrounds. "fadeIn" class makes content fades in on loading-->
+
+<!--Off-Canvas-->
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+
+        <!--Off-Canvas Menu-->
+        <aside class="left-off-canvas-menu">
+            <div class="mobile-navi">
+                <form method="get" class="mobile-search">
+                    <label class="sr-only" for="m-search"></label>
+                    <input class="form-control input-lg" name="m-search" id="m-search" type="text" placeholder="Search">
+                    <button type="submit"><i class="flaticon-search100"></i></button>
+                </form>
+                <!--<ul>-->
+                <!--&lt;!&ndash;<li class="current"><a href="index.html">Home</a><span></span></li>&ndash;&gt;-->
+                <!--<li><a href="index.html">Home</a><span></span></li>-->
+                <!--</ul>-->
+            </div>
+        </aside><!--Off-Canvas Menu Close-->
+
+        <!--Layout-->
+        <div class="site-layout"><!--If you add class "boxed" to .site-layout it wraps the whole document in a box, than you can simply add pattern background to body or leave it white. Please note in a "boxed" mode header doesn't stick to the top.-->
+
+            <!--Header Toolbar-->
+            <div class="header-toolbar">
+                <div class="container">
+                    <div class="cont-info">
+                        <div><i class="fa fa-map-marker"></i>1 Gilbert Ave., Menlo Park, CA, USA</div>
+                        <div><i class="fa fa-phone"></i>+1 (555) 555-12-34</div>
+                        <div><i class="fa fa-envelope"></i><a href="mailto:info@greenity.us">info@greenity.us</a></div>
+                    </div>
+                    <div class="social-bar">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        <a href="#"><i class="fa fa-github-alt"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+            </div><!--Header Toolbar Close-->
+
+            <!--Header-->
+            <header class="header sticky"><!--Adding class "sticky" to header enables its pinning to top on scroll. Please note in a "boxed" mode header doesn't stick to the top.-->
+                <div class="inner">
+                    <div class="container group">
+
+                        <!--Logo-->
+                        <a class="logo" href="index.html"><img src="img/greenity/greenity_logo.png" alt="Greenity"/></a>
+
+                        <!--Navigation Toggle-->
+                        <div class="left-off-canvas-toggle" id="nav-toggle">
+                            <span></span>
+                        </div>
+
+                        <!--Site Navigation-->
+                        <div class="navigation">
+                            <!--Menu-->
+                            <nav class="menu">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active has-mega-menu"><a href="map_real.html">Full Map</a></li>
+                                    <li><a href="index.html#contact-us">Contact Us</a></li>
+                                </ul>
+                            </nav>
+                            <!--Search-->
+                            <!--<div class="search"><i class="flaticon-search100"></i></div>-->
+                        </div>
+
+                        <!--Tools-->
+                        <!--<div class="tools group">-->
+
+                    </div>
+                </div>
+
+                <!--Quick Search-->
+                <form class="quick-search" method="get" autocomplete="off">
+                    <div class="overlay"></div>
+                    <input class="search-field" type="text" placeholder="Search">
+                    <span>Press enter to search</span>
+                </form>
+
+            </header><!--Header Close-->
+
+            <!--Page Content--><!-- InstanceBeginEditable name="content" -->
+            <div class="page">
+
+                <!--Profile Info-->
+                <section class="page-block">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-sm-push-6 col-md-push-6 space-bottom">
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-sm-pull-6 col-md-pull-6">
+
+                                <!--Greenity Map -->
+
+<h2 class="post-title">Greenity Map</h2>
+<!--<h2><p>Dynamic map will appear here.</p></h2>-->
+<div id="map">
+    <!--<img src="img/greenity/greenity_map.toxconc.ca.png" alt="Greenity Map"/>-->
+
+</div>
+<script>
     var map;
     var mapData;
     var mapTiles = new Set();
@@ -135,5 +262,98 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy7rwO5iZVrFq-jGN8au3hwIcCg2Jaiko&callback=initMap">
 </script>
-</body>
+
+<!--Greenity Map Close-->
+
+                                <div class="block-devider">
+                                    <!--<ul class="featured-list">-->
+                                    <!--<li>Air you breathe</li>-->
+                                    <!--<li>Water you drink</li>-->
+                                    <!--<li>Soil you walk on</li>-->
+                                    <!--<li>One simple score</li>-->
+                                    <!--</ul>-->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section><!--Profile Info Close-->
+            </div>
+            <!--Page Content Close-->
+
+            <!--Footer-->
+            <footer class="footer">
+                <!--Copyright-->
+                <div class="copyright text-center">
+                    <div class="container">
+                        <p class="pull-left">1 Gilbert Ave., Menlo Park, CA 94025, USA</p>
+                        <div class="social-bar">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-reddit"></i></a>
+                            <!--<a href="#"><i class="fa fa-github-alt"></i></a>-->
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </footer><!--Footer Close-->
+
+        </div><!--Layout Close-->
+
+        <!-- close the off-canvas menu -->
+        <a class="exit-off-canvas"></a>
+    </div>
+</div><!--Off-Canvas Close-->
+
+<!--Sticky Buttons-->
+<div class="sticky-btns">
+    <form class="quick-contact" method="post" name="quick-contact">
+        <h3>Contact us</h3>
+        <div class="form-group">
+            <label for="qc-name">Full Name</label>
+            <input class="form-control" type="text" name="qc-name" id="qc-name" placeholder="Enter full name" required>
+        </div>
+        <div class="form-group">
+            <label for="qc-email">E-mail</label>
+            <input class="form-control" type="email" name="qc-email" id="qc-email" placeholder="Enter e-mail" required>
+        </div>
+        <div class="form-group">
+            <label for="qc-message">Your message</label>
+            <textarea class="form-control" name="qc-message" id="qc-message" placeholder="Enter your message" required></textarea>
+        </div>
+        <input class="btn btn-primary btn-block" type="submit" value="Send">
+    </form>
+    <span id="qcf-btn"><i class="fa fa-envelope"></i></span>
+    <span id="scrollTop-btn"><i class="fa fa-chevron-up"></i></span>
+</div><!--Sticky Buttons Close-->
+
+<!--Javascript (jQuery) Libraries and Plugins-->
+<script src="js/libs/jquery-1.11.1.min.js"></script>
+<script src="js/libs/jquery.easing.min.js"></script>
+<script src="js/plugins/bootstrap.min.js"></script>
+<script src="js/plugins/bootstrap-datepicker.js"></script>
+<script src="js/plugins/smoothscroll.js"></script>
+<script src="js/plugins/utilities.js"></script>
+<script src="js/plugins/foundation.min.js"></script>
+<script src="js/plugins/jquery.placeholder.js"></script>
+<script src="js/plugins/icheck.min.js"></script>
+<script src="js/plugins/jquery.validate.min.js"></script>
+<script src="js/plugins/waypoints.min.js"></script>
+<script src="js/plugins/isotope.min.js"></script>
+<script src="js/plugins/masterslider.min.js"></script>
+<script src="js/plugins/owl.carousel.min.js"></script>
+<script src="js/plugins/lightGallery.min.js"></script>
+<script src="js/plugins/jquery.stellar.min.js"></script>
+<script src="js/plugins/jquery.parallax.min.js"></script>
+<script src="js/plugins/chart.min.js"></script>
+<script src="js/plugins/jquery-numerator.js"></script>
+<script src="js/plugins/jquery.countdown.min.js"></script>
+<script src="js/plugins/jquery.easypiechart.min.js"></script>
+<script src="js/plugins/jquery.nouislider.min.js"></script>
+<script src="js/plugins/card.min.js"></script>
+<script src="js/scripts.js"></script>
+
+
+</body><!--Body Close-->
 </html>
