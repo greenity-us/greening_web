@@ -4,18 +4,74 @@ body {
   font-family: sans-serif;
   background-image: url('/images/windmill.jpg');
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
 }
 
-.container-fluid {
-  background-color: rgba(255, 255, 255, 0.5);
+section {
+  padding-top: 1rem;
+}
+
+.mask {
+  background-color: rgba(230, 230, 230, 0.7);
+}
+
+.headline {
+  text-align: center;
+  text-decoration: underline;
+  margin: 1rem 0.5rem 2rem 0.5rem;
+  font-weight: 100;
+}
+
+.subheading {
+  line-height: 3rem;
 }
 
 #logo-img {
   max-height: 8rem;
 }
 
+#nav-list {
+  list-style-type: none;
+  padding-right: 2.5rem;
+  font-size: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 2rem;
+}
+
+#nav-list li {
+  margin: 1.5rem 0 2rem 0;
+  border-bottom: 2px solid green;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+#nav-list li:hover {
+  color: green;
+  text-decoration: none;
+  background-color: rgba(0, 115, 0, 0.1)
+}
+
+#nav-list li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
 #map {
   margin-top: 5rem;
   margin-bottom: 5rem;
+}
+
+#main-info {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#newtestmap {
+  padding: 0;
+}
+
+#data {
+  padding-bottom: 3vh;
 }

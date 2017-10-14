@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { MapWithASearchBox } from './map';
+import Gmap from './helpers/mapcontainer';
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <MapWithASearchBox />
@@ -11,4 +11,10 @@ class App extends Component {
   }
 }
 
-export default App;
+export class Heatmap extends Component {
+  render() {
+    return (
+      <Gmap />
+    );
+  }
+}

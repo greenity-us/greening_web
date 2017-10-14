@@ -18,6 +18,18 @@
   font-size: large;
 }
 
+#search-input {
+  border: 1px solid green;
+  width: 70vw;
+  height: 2em;
+  margin: 0 auto;
+  margin-top: 25px;
+  border-radius: 10px;
+  box-shadow: '0 2px 6px rgba(0, 0, 0, 0.3)';
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
