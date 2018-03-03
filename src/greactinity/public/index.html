@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="keywords" content="greenity, environmental data, health map">
+    <meta name="description" content="An interactive map about your environment's health">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106869473-1"></script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments)};
+     gtag('js', new Date());
+
+     gtag('config', 'UA-106869473-1');
+    </script>
+    <title>Greenity - Visualize Environmental Effects on Land Around You</title>
+    <!-- Google Maps Script URL below -->
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnWosRCKLdYTOWPwSjf-NjJuSehxvE_YY"></script> -->
+  </head>
+  <body>
+    <main class="container-fluid mask">
+      <section class="row">
+        <div class="col-sm-3" id="hero-copy">
+          <img class="img-fluid" id="logo-img" src="%PUBLIC_URL%/images/greenity_logo.png">
+          <div class="container-fluid d-flex h-75">
+            <div class="row justify-content-center align-self-center mx-auto">
+              <ul class="text-center" id="nav-list">
+                <li>
+                  <a href="#main-info">About</a>
+                </li>
+                <li>
+                  <a href="#data">Get Regional Data</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <noscript>
+            You need to enable JavaScript to run this app.
+          </noscript>
+          <div id="map"></div>
+        </div>
+      </section>
+      <section id="main-info" class="container-fluid">
+        <h1 class="headline">Know Your Environmental Health Risks</h1>
+        <div class="row px-5">
+          <div class="col-sm-6">
+            <h3 class="subheading">What Are You Breathing?</h3>
+            <p>
+              Manufacturing jobs can be a boom to local economies, but they can also spell shortened lifespans for all nearby residents. Although manufacturing today is much cleaner than it used to be, there are still unregulared chemicals being released into the atmosphere by some industries.
+            </p>
+            <p>
+              Even in 2017, more than half our energy comes from coal. Most of the rest comes from natural gas. Although natural gas is cleaner, both fuels still release Carbon Dioxide into our atmosphere, leading to global climate change and unpredictable, catastrophic natural disasters. And that's just point-source air pollution, or pollution from a single big polluter like a factory or manufacturing facility.
+            </p>
+            <p>
+              Distributed air pollution is more difficult to track, but can be just as dangerous in the long run. Pollution and greenhouse gases released in urban areas from large amounts of automobiles can create a thick smog layer for everyone in the area, making breathing every day as dangerous as smoking a pack of cigarettes.
+            </p>
+            <p>
+              Find out about your air quality using the interactive map above.
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <h3 class="subheading">Toxic Hazardous Waste</h3>
+            <p>
+              There are dangerous Superfund sites in every part of the country left over from the 60's and 70's. During this time, manufacturers were allowed to freely leech poisonous chemicals into our rivers, which soon contaminated our water supply. 
+            </p>
+            <p>
+              They were also allowed to freely dump hazardous waste like battery acid, lead,and other dangerous materials into poorly built landfills. This hazardous waste made some areas so dangerous and uninhabitable that sometimes the trash would catch fire. When it rained, many of these chemicals would also make their way into our groundwater. These Superfund sites still exist today.
+            </p>
+            <p>
+              Find out how many sites are near your home or potential place of residence so you can make a smarter decision about where you live using the interactive map above.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="data">
+        <div class="col-sm-6"></div>
+        <!-- Begin MailChimp Signup Form -->
+        <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+        <style type="text/css">
+          #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+          /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+            We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style>
+        <div id="mc_embed_signup" class="col-sm-6">
+        <form action="https://greenity.us16.list-manage.com/subscribe/post?u=d0dea3142df81064110465d79&amp;id=a380523e93" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+          <h2>Download Environmental Data for Your Region (when available)</h2>
+        <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+        <div class="mc-field-group">
+          <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+        </label>
+          <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+        </div>
+        <div class="mc-field-group">
+          <label for="mce-FNAME">First Name  <span class="asterisk">*</span>
+        </label>
+          <input type="text" value="" name="FNAME" class="required" id="mce-FNAME">
+        </div>
+        <div class="mc-field-group">
+          <label for="mce-LNAME">Last Name  <span class="asterisk">*</span>
+        </label>
+          <input type="text" value="" name="LNAME" class="required" id="mce-LNAME">
+        </div>
+        <div class="mc-field-group">
+          <label for="mce-MMERGE4">Zip Code  <span class="asterisk">*</span>
+        </label>
+          <input type="text" value="" name="MMERGE4" class="required" id="mce-MMERGE4">
+        </div>
+        <div class="mc-field-group">
+          <label for="mce-MMERGE3">Purpose of Data  <span class="asterisk">*</span>
+        </label>
+          <select name="MMERGE3" class="required" id="mce-MMERGE3">
+          <option value=""></option>
+          <option value="Environmental Consulting">Environmental Consulting</option>
+        <option value="Property Evaluation">Property Evaluation</option>
+        <option value="Other Professional Use">Other Professional Use</option>
+        <option value="Personal Curiosity">Personal Curiosity</option>
+
+          </select>
+        </div>
+          <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+          </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d0dea3142df81064110465d79_a380523e93" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Get Environmental Data" name="subscribe" id="mc-embedded-subscribe" class="button" style="background-color: #025D4D"></div>
+            </div>
+        </form>
+        </div>
+
+        <!--End mc_embed_signup-->
+      </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places,visualization"></script>
+  </body>
+</html>
